@@ -142,15 +142,13 @@ const manejarFormularioCliente = (event) => {
         clientes[mes] = [];
     }
 
-    for (let { dia } of diasHorarios) {
-        const count = clientes[mes].filter(c => c.diasHorarios.some(dh => dh.dia === dia)).length;
-        if (count >= 5) {
-            alert(`El cupo para ${dia} está lleno.`);
-            return;
-        }
+    let clienteExistente = clientes[mes].find(c => c.nombre === nombre);
+    if (clienteExistente) {
+        clienteExistente.diasHorarios.push(...diasHorarios);
+        clienteExistente.pago = pago; // Actualiza el estado de pago si es necesario
+    } else {
+        clientes[mes].push({ nombre, diasHorarios, pago });
     }
-    
-    clientes[mes].push({ nombre, diasHorarios, pago });
 
     // Guardar en localStorage
     localStorage.setItem('clientes', JSON.stringify(clientes));
@@ -161,6 +159,7 @@ const manejarFormularioCliente = (event) => {
     alert('Cliente agregado exitosamente.');
     mostrarFormularioNuevoCliente(mesIndex, mes);
 };
+
 
 const actualizarHorarios = (mes) => {
     const clientesMes = clientes[mes] || [];
@@ -276,6 +275,14 @@ const mostrarVistaGeneral = (mes) => {
         </table>
     `;
 };
+
+const togglePago = (checkbox, mes, nombre) => {
+    const cliente = clientes[mes].find(c => c.nombre === nombre);
+    cliente.pago = checkbox.checked ? 'pagado' : 'aPagar';
+    localStorage.setItem('clientes', JSON.stringify(clientes));
+    guardarDatos();
+};
+
 
 // Inicializar al cargar la página
 document.addEventListener('DOMContentLoaded', cargarMeses);
