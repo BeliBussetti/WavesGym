@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Clientes del Gimnasio</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <a href=""><img src="img/logo.png" alt="Waves Logo"></a>
+            <span>Waves</span>
+        </div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+        </ul>
+    </nav>
+    <h1>Gestión de Clientes del Gimnasio</h1>
+    
+    <div id="meses" class="grid-container">
+        <!-- Aquí se cargarán los meses como cards -->
+    </div>
+
+    <div id="contenido" class="hidden">
+        <!-- Aquí se cargarán el formulario y la grilla de días y horarios -->
+    </div>
+
+    <div>
+        <button onclick="guardarDatos()">Guardar Datos</button>
+        <input type="file" id="cargarDatos" onchange="cargarDatos()" accept=".json">
+    </div>
+
+    <div>
+        <button onclick="cambiarVista('horarios')">Vista Horarios</button>
+        <button onclick="cambiarVista('general')">Vista General</button>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

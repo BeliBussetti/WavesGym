@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 30px;
+    margin-right: 10px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 20px;
+}
+
+.card {
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+
+.card:hover {
+    background-color: #ddd;
+}
+
+.hidden {
+    display: none;
+}
+
+#diasHorariosContainer .diaHorario {
+    margin-bottom: 10px;
+}
+
+.diaHorario label, .diaHorario select, .diaHorario button {
+    margin-right: 10px;
+}
+
+#horariosSemana {
+    margin-top: 20px;
+}
+
+.dia {
+    margin-bottom: 20px;
+}
+
+.dia h3 {
+    margin: 0;
+    padding: 10px;
+    background-color: #f1f1f1;
+}
+
+.horarios {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.horario {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+}
+
+.card.active {
+    background-color: #333;
+    color: white;
+}
+.hidden {
+    display: none;
+}
