@@ -98,3 +98,20 @@ th, td {
     padding: 10px;
     text-align: center;
 }
+
+.horarios {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 5px;
+}
+
+.horario {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+.horario div {
+    margin-top: 5px;
+}
