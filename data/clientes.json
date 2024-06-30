@@ -1,0 +1,14 @@
+{
+  "1": [
+    {
+      "nombre": "jonny perez",
+      "diasHorarios": [
+        {
+          "dia": "Lunes",
+          "horario": "7:00"
+        }
+      ],
+      "pago": "pagado"
+    }
+  ]
+}

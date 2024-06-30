@@ -1,4 +1,4 @@
-let clientes = JSON.parse(localStorage.getItem('clientes')) || {};
+let clientes = {};
 let mesCopiado = null;
 const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
@@ -160,7 +160,6 @@ const manejarFormularioCliente = (event) => {
     mostrarFormularioNuevoCliente(mesIndex, mes);
 };
 
-
 const actualizarHorarios = (mes) => {
     const clientesMes = clientes[mes] || [];
     document.querySelectorAll('.horarios div[id]').forEach(div => div.innerHTML = ''); // Limpiar horarios
@@ -259,6 +258,7 @@ const mostrarVistaGeneral = (mes) => {
                     <th>Nombre y Apellido</th>
                     <th>Días</th>
                     <th>Estado de Pago</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -268,6 +268,9 @@ const mostrarVistaGeneral = (mes) => {
                         <td>${cliente.diasHorarios.length}</td>
                         <td>
                             <input type="checkbox" ${cliente.pago === 'pagado' ? 'checked' : ''} onclick="togglePago(this, '${mes}', '${cliente.nombre}')">
+                        </td>
+                        <td>
+                            <button onclick="eliminarCliente('${mes}', '${cliente.nombre}')">Eliminar</button>
                         </td>
                     </tr>
                 `).join('')}
@@ -283,6 +286,11 @@ const togglePago = (checkbox, mes, nombre) => {
     guardarDatos();
 };
 
+const eliminarCliente = (mes, nombre) => {
+    clientes[mes] = clientes[mes].filter(c => c.nombre !== nombre);
+    localStorage.setItem('clientes', JSON.stringify(clientes));
+    mostrarVistaGeneral(mes);
+};
 
 // Inicializar al cargar la página
 document.addEventListener('DOMContentLoaded', cargarMeses);
