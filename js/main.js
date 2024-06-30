@@ -157,7 +157,7 @@ const manejarFormularioCliente = (event) => {
     actualizarHorarios(mes);
     
     alert('Cliente agregado exitosamente.');
-    mostrarFormularioNuevoCliente(mesIndex, mes);
+    mostrarFormularioNuevoCliente(mes, meses[mes - 1]);
 };
 
 const actualizarHorarios = (mes) => {
@@ -293,4 +293,8 @@ const eliminarCliente = (mes, nombre) => {
 };
 
 // Inicializar al cargar la página
-document.addEventListener('DOMContentLoaded', cargarMeses);
+document.addEventListener('DOMContentLoaded', () => {
+    cargarMeses();
+    document.getElementById('guardar-datos').addEventListener('click', guardarDatos);
+    document.getElementById('cargar-json').addEventListener('change', cargarDatos);
+});

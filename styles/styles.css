@@ -29,22 +29,6 @@ nav .logo span {
     font-weight: bold;
 }
 
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
 h1 {
     text-align: center;
     margin-top: 20px;
