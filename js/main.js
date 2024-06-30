@@ -230,8 +230,8 @@ const pegarMes = () => {
 window.addEventListener('beforeunload', (event) => {
     if (localStorage.getItem('clientes') !== JSON.stringify(clientes)) {
         const confirmationMessage = 'Hay cambios sin guardar. ¿Desea salir de todos modos?';
-        event.returnValue = confirmationMessage; // Gecko, Trident, Chrome 34+
-        return confirmationMessage;              // Gecko, WebKit, Chrome <34
+        event.preventDefault(); // Necesario para algunos navegadores
+        event.returnValue = confirmationMessage; // Requerido para Chrome, Firefox, IE
     }
 });
 
@@ -297,4 +297,12 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarMeses();
     document.getElementById('guardar-datos').addEventListener('click', guardarDatos);
     document.getElementById('cargar-json').addEventListener('change', cargarDatos);
+
+    window.addEventListener('beforeunload', (event) => {
+        if (localStorage.getItem('clientes') !== JSON.stringify(clientes)) {
+            const confirmationMessage = 'Hay cambios sin guardar. ¿Desea salir de todos modos?';
+            event.preventDefault(); // Necesario para algunos navegadores
+            event.returnValue = confirmationMessage; // Requerido para Chrome, Firefox, IE
+        }
+    });
 });
