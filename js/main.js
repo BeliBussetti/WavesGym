@@ -226,14 +226,10 @@ const pegarMes = () => {
     }
 };
 
-// Advertencia al intentar cerrar la página con cambios no guardados
-window.addEventListener('beforeunload', (event) => {
-    if (localStorage.getItem('clientes') !== JSON.stringify(clientes)) {
-        const confirmationMessage = 'Hay cambios sin guardar. ¿Desea salir de todos modos?';
-        event.preventDefault(); // Necesario para algunos navegadores
-        event.returnValue = confirmationMessage; // Requerido para Chrome, Firefox, IE
-    }
-});
+// Función para ordenar alfabéticamente los clientes
+const ordenarClientes = (clientes) => {
+    return clientes.sort((a, b) => a.nombre.localeCompare(b.nombre));
+};
 
 // Función para cambiar la vista
 const cambiarVista = (vista) => {
@@ -248,10 +244,13 @@ const cambiarVista = (vista) => {
     }
 };
 
+// Mostrar Vista General
 const mostrarVistaGeneral = (mes) => {
     const contenido = document.getElementById('contenido');
+    const clientesMes = ordenarClientes(clientes[mes] || []);
     contenido.innerHTML = `
         <h2>Vista General de ${meses[mes - 1]}</h2>
+        <input type="checkbox" id="checkboxMaestro" onchange="toggleCheckboxes(this)"> Marcar/Desmarcar todos
         <table>
             <thead>
                 <tr>
@@ -262,12 +261,12 @@ const mostrarVistaGeneral = (mes) => {
                 </tr>
             </thead>
             <tbody>
-                ${clientes[mes].map(cliente => `
+                ${clientesMes.map(cliente => `
                     <tr>
                         <td>${cliente.nombre}</td>
                         <td>${cliente.diasHorarios.length}</td>
                         <td>
-                            <input type="checkbox" ${cliente.pago === 'pagado' ? 'checked' : ''} onclick="togglePago(this, '${mes}', '${cliente.nombre}')">
+                            <input type="checkbox" class="pagoCheckbox" ${cliente.pago === 'pagado' ? 'checked' : ''} onclick="togglePago(this, '${mes}', '${cliente.nombre}')">
                         </td>
                         <td>
                             <button onclick="eliminarCliente('${mes}', '${cliente.nombre}')">Eliminar</button>
@@ -277,6 +276,16 @@ const mostrarVistaGeneral = (mes) => {
             </tbody>
         </table>
     `;
+};
+
+// Check general
+const toggleCheckboxes = (source) => {
+    const checkboxes = document.querySelectorAll('.pagoCheckbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = source.checked;
+        const nombre = checkbox.closest('tr').querySelector('td').textContent;
+        togglePago(checkbox, document.getElementById('contenido').dataset.mes, nombre);
+    });
 };
 
 const togglePago = (checkbox, mes, nombre) => {
