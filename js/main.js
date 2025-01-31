@@ -51,6 +51,7 @@ const mostrarFormularioNuevoCliente = (mesIndex, mes) => {
                         <option value="18:00">18:00</option>
                         <option value="19:00">19:00</option>
                         <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
                     </select>
                     <button type="button" onclick="agregarDiaHorario()">Agregar día</button>
                 </div>
@@ -69,7 +70,7 @@ const mostrarFormularioNuevoCliente = (mesIndex, mes) => {
                 <div class="dia">
                     <h3>${dia}</h3>
                     <div class="horarios">
-                        ${['7:00', '8:00', '9:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'].map(hora => `
+                        ${['7:00', '8:00', '9:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'].map(hora => `
                             <div class="horario">
                                 <span>${hora}</span>
                                 <div id="${dia}_${hora.replace(':', '')}"></div>
@@ -292,7 +293,6 @@ const togglePago = (checkbox, mes, nombre) => {
     const cliente = clientes[mes].find(c => c.nombre === nombre);
     cliente.pago = checkbox.checked ? 'pagado' : 'aPagar';
     localStorage.setItem('clientes', JSON.stringify(clientes));
-    guardarDatos();
 };
 
 const eliminarCliente = (mes, nombre) => {
